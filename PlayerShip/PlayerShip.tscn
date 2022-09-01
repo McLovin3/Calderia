@@ -36,7 +36,7 @@ animations = [ {
 } ]
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
-scale = Vector2( 0.5, 0.5 )
+scale = Vector2( 0.75, 0.75 )
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
