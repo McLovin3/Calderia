@@ -5,16 +5,20 @@ export var max_speed := 20000
 export var turning_speed := 1
 export var acceleration := 0.001
 export var friction := 0.005
+export var wall_slow_multiplier = 0.1
 
-#Player can accelerate when against a wall
 func _physics_process(delta : float) -> void:
 	_rotate(delta)
-	move_and_slide(_get_direction(delta))
+	var _unused_velocity = move_and_slide(_get_direction(delta))
 
 var _velocity := 0
 func _get_direction(delta : float) -> Vector2:
 	if Input.is_action_pressed("up"):
-		_velocity = lerp(_velocity, Input.get_action_strength("up") * max_speed, acceleration)
+		if is_on_ceiling() || is_on_wall() || is_on_floor():
+			_velocity = lerp(_velocity, Input.get_action_strength("up") * max_speed * wall_slow_multiplier, acceleration)
+		
+		else:
+			_velocity = lerp(_velocity, Input.get_action_strength("up") * max_speed, acceleration)
 	
 	else:
 		_velocity = lerp(_velocity, 0, friction)
