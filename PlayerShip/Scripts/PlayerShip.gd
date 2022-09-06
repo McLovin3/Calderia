@@ -5,13 +5,19 @@ export var max_speed := 20000
 export var turning_speed := 1
 export var acceleration := 0.001
 export var friction := 0.005
-export var wall_slow_multiplier = 0.1
+export var wall_slow_multiplier := 0.1
+export var min_fish_speed := 2000
+
+var _velocity := 0
+
+func _unhandled_input(event):
+	if event.is_action_pressed("left_click") && _velocity <= min_fish_speed:
+		print(event)
 
 func _physics_process(delta : float) -> void:
 	_rotate(delta)
 	var _unused_velocity = move_and_slide(_get_direction(delta))
 
-var _velocity := 0
 func _get_direction(delta : float) -> Vector2:
 	if Input.is_action_pressed("up"):
 		if is_on_ceiling() || is_on_wall() || is_on_floor():
@@ -25,7 +31,6 @@ func _get_direction(delta : float) -> Vector2:
 	
 	var direction_player_is_facing =  Vector2(sin(rotation), -cos(rotation))
 	return direction_player_is_facing * _velocity * delta
-
 
 func _rotate(delta : float) -> void:
 	var percentage_of_max_speed := _velocity as float / max_speed
