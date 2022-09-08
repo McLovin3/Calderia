@@ -1,8 +1,8 @@
 [gd_scene load_steps=52 format=2]
 
-[ext_resource path="res://Tilemaps/Sprites/BlankSand.png" type="Texture" id=1]
-[ext_resource path="res://Tilemaps/Sprites/VolcanoWallTilemap.png" type="Texture" id=2]
-[ext_resource path="res://Tilemaps/Sprites/Water.png" type="Texture" id=4]
+[ext_resource path="res://MainMap/Sprites/BlankSand.png" type="Texture" id=1]
+[ext_resource path="res://MainMap/Sprites/VolcanoWallTilemap.png" type="Texture" id=2]
+[ext_resource path="res://MainMap/Sprites/Water.png" type="Texture" id=4]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )

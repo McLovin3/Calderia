@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/VolcanoWallTilemap.png-c5a94aa5c4a864c668cf811ca1c1fc53.stex"
+path="res://.import/BlankSand.png-a18bf6076da7c9c30a38c10490f6b38a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Tilemaps/Sprites/VolcanoWallTilemap.png"
-dest_files=[ "res://.import/VolcanoWallTilemap.png-c5a94aa5c4a864c668cf811ca1c1fc53.stex" ]
+source_file="res://MainMap/Sprites/BlankSand.png"
+dest_files=[ "res://.import/BlankSand.png-a18bf6076da7c9c30a38c10490f6b38a.stex" ]
 
 [params]
 
