@@ -53,9 +53,10 @@ animations = [ {
 } ]
 
 [node name="AnimatedSprite" type="AnimatedSprite"]
+scale = Vector2( 0.7, 0.7 )
 frames = SubResource( 10 )
 animation = "Bobbing"
-frame = 3
+frame = 1
 playing = true
 script = ExtResource( 1 )
 

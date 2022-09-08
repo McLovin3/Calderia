@@ -14,9 +14,9 @@ var _animation_name : String
 func _ready() -> void:
 	# https://godotengine.org/qa/78007/there-way-randomly-select-animation-play-for-animated-sprite
 	randomize()
-	_get_random_animation()
+	_get_random_mouse_button()
 
-func _get_random_animation() -> void:
+func _get_random_mouse_button() -> void:
 	var animations := _animated_sprites.frames.get_animation_names()
 	var animation_id := randi() % animations.size()
 	_animation_name = animations[animation_id]
@@ -29,19 +29,17 @@ func _get_random_animation() -> void:
 
 func _unhandled_input(event) -> void:
 	if event is InputEventMouseButton or event is InputEventKey:
-		if _animation_name == "LeftClick" and event.is_action("left_click"):
-			print("Fish Caught")
-		
-		elif _animation_name == "RightClick" and event.is_action("right_click"):
+		if _animation_name == "LeftClick" and event.is_action_pressed("left_click"):
 			emit_signal("fish_caught")
 		
-		elif _animation_name == "MiddleClick" and event.is_action("middle_click"):
+		elif _animation_name == "RightClick" and event.is_action_pressed("right_click"):
 			emit_signal("fish_caught")
 		
-		else:
+		elif _animation_name == "MiddleClick" and event.is_action_pressed("middle_click"):
+			emit_signal("fish_caught")
+		
+		elif event.is_pressed():
 			emit_signal("fish_escaped")
-			queue_free()
 
 func _on_Timer_timeout() -> void:
 	emit_signal("fish_escaped")
-	queue_free()
