@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "AnimatedSprite",
+"class": "Bobber",
+"language": "GDScript",
+"path": "res://Bobber/Scripts/Bobber.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "PlayerShip",
 "language": "GDScript",
@@ -20,6 +25,7 @@ _global_script_classes=[ {
 "path": "res://QuickTimeEvent/Scripts/QuickTimeEvent.gd"
 } ]
 _global_script_class_icons={
+"Bobber": "",
 "PlayerShip": "",
 "QuickTimeEvent": ""
 }
