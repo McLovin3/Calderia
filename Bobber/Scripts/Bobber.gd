@@ -6,15 +6,17 @@ signal fish_lost
 
 onready var _caught_timer : Timer = $CaughtTimer
 
-export var bite_rate := 0.15
-
+var _bite_rate
 var hooked = false
+
+func _init(bite_rate : float) -> void:
+	_bite_rate = bite_rate
 
 func _ready() -> void:
 	randomize()
 
 func _on_RandomTimer_timeout():
-	if randf() <= bite_rate and not hooked:
+	if randf() <= _bite_rate and not hooked:
 		hooked = true
 		play("Caught")
 		_caught_timer.start()

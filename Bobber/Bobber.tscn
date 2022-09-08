@@ -55,7 +55,7 @@ animations = [ {
 [node name="AnimatedSprite" type="AnimatedSprite"]
 frames = SubResource( 10 )
 animation = "Bobbing"
-frame = 4
+frame = 3
 playing = true
 script = ExtResource( 1 )
 
