@@ -13,7 +13,7 @@ func set_bite_rate(bite_rate : float) -> void:
 func _ready() -> void:
 	randomize()
 
-func _unhandled_input(event):
+func _unhandled_input(event) -> void:
 	if _hooked and event.is_action_pressed("left_click"):
 		var instance = _quick_time_event.instance()
 		instance.connect("fish_caught", self, "_fish_caught")
@@ -24,20 +24,20 @@ func _unhandled_input(event):
 		print("Cancelled")
 		queue_free()
 
-func _on_RandomTimer_timeout():
+func _on_RandomTimer_timeout() -> void:
 	if randf() <= _bite_rate and not _hooked:
 		_hooked = true
 		play("Caught")
 		_caught_timer.start()
 
-func _on_CaughtTimer_timeout():
+func _on_CaughtTimer_timeout() -> void:
 	_hooked = false
 	play("Bobbing")
 
-func _fish_caught():
+func _fish_caught() -> void:
 	print("Caught!")
 	queue_free()
 
-func _fish_escaped():
+func _fish_escaped() -> void:
 	print("Escaped!")
 	queue_free()

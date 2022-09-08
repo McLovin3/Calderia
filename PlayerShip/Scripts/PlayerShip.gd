@@ -15,16 +15,19 @@ var _fishing = false
 var _velocity := 0
 
 func _unhandled_input(event) -> void:
-	if not _fishing and event.is_action_pressed("left_click") && _velocity <= min_fish_speed:
-		var instance = _bobber.instance()
-		get_parent().add_child(instance)
-		instance.position = get_parent().get_local_mouse_position()
-		instance.set_bite_rate(bite_rate)
-		get_tree().root.print_tree_pretty()
-		instance.connect("child_exiting_tree", self, "_stopped_fishing")
-		_fishing = true
+	#https://godotengine.org/qa/80382/is-it-possible-to-detect-if-mouse-pointer-hovering-over-area
+	var space = get_world_2d().direct_space_state
+	
+	if not space.intersect_point(get_global_mouse_position()):
+		if not _fishing and event.is_action_pressed("left_click") && _velocity <= min_fish_speed:
+			var instance = _bobber.instance()
+			get_parent().add_child(instance)
+			instance.position = get_parent().get_local_mouse_position()
+			instance.set_bite_rate(bite_rate)
+			instance.connect("child_exiting_tree", self, "_stopped_fishing")
+			_fishing = true
 
-func _stopped_fishing(joe):
+func _stopped_fishing(__) -> void:
 	_fishing = false
 
 func _physics_process(delta : float) -> void:
