@@ -1,8 +1,9 @@
 extends Control
 class_name QuickTimeEvent
 
-signal fish_caught
-signal fish_escaped
+signal quick_time_event_succeeded
+signal quick_time_event_failed
+
 
 onready var _animated_sprites : AnimatedSprite = $AnimatedSprite
 onready var _timer : Timer = $Timer
@@ -30,16 +31,16 @@ func _get_random_mouse_button() -> void:
 func _unhandled_input(event) -> void:
 	if event is InputEventMouseButton or event is InputEventKey:
 		if _animation_name == "LeftClick" and event.is_action_pressed("left_click"):
-			emit_signal("fish_caught")
+			emit_signal("quick_time_event_succeeded")
 		
 		elif _animation_name == "RightClick" and event.is_action_pressed("right_click"):
-			emit_signal("fish_caught")
+			emit_signal("quick_time_event_succeeded")
 		
 		elif _animation_name == "MiddleClick" and event.is_action_pressed("middle_click"):
-			emit_signal("fish_caught")
+			emit_signal("quick_time_event_succeeded")
 		
 		elif event.is_pressed():
-			emit_signal("fish_escaped")
+			emit_signal("quick_time_event_failed")
 
 func _on_Timer_timeout() -> void:
-	emit_signal("fish_escaped")
+	emit_signal("quick_time_event_failed")

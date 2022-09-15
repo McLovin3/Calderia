@@ -1,9 +1,6 @@
 extends AnimatedSprite
 class_name Bobber
 
-signal stone_collected
-signal wood_collected
-
 var _random_fish := preload("res://RandomFish/RandomFish.tscn") 
 onready var _quick_time_event := preload("res://QuickTimeEvent/QuickTimeEvent.tscn")
 onready var _caught_timer : Timer = $CaughtTimer
@@ -18,8 +15,8 @@ func _ready() -> void:
 func _unhandled_input(event) -> void:
 	if _hooked and event.is_action_pressed("left_click"):
 		var instance = _quick_time_event.instance()
-		instance.connect("fish_caught", self, "_fish_caught")
-		instance.connect("fish_escaped", self, "_fish_escaped")
+		instance.connect("quick_time_event_succeeded", self, "_fish_caught")
+		instance.connect("quick_time_event_failed", self, "_fish_escaped")
 		instance.frames_per_second *= rand_range(1 - _fish_size_max_percentage, 1 + _fish_size_max_percentage)
 		add_child(instance)
 	
