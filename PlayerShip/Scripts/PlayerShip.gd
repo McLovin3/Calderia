@@ -4,7 +4,6 @@ class_name PlayerShip
 var _bobber = preload("res://Bobber/Bobber.tscn")
 
 export var max_speed := 20000
-export var turning_speed := 1
 export var acceleration := 0.001
 export var friction := 0.005
 export var wall_slow_multiplier := 0.1
@@ -23,7 +22,7 @@ func _unhandled_input(event) -> void:
 			var instance = _bobber.instance()
 			get_parent().add_child(instance)
 			instance.position = get_parent().get_local_mouse_position()
-			instance.set_bite_rate(bite_rate)
+			instance._bite_rate_per_frame = bite_rate
 			instance.connect("child_exiting_tree", self, "_stopped_fishing")
 			_fishing = true
 

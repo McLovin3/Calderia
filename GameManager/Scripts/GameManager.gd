@@ -1,4 +1,5 @@
 extends Node2D
+class_name GameManager
 
 var _save_path = "user://savegame.save"
 var _ressources := {"wood" : 0, "stone" : 0}
@@ -14,10 +15,8 @@ func _load_game() -> void:
 	if not save_file.file_exists(_save_path):
 		_save_game()
 	
-	var error = save_file.open_encrypted_with_pass(_save_path, File.READ, "McLovin")
+	var _error = save_file.open_encrypted_with_pass(_save_path, File.READ, "McLovin")
 	_ressources = parse_json(save_file.get_line())
-	
-	print(_ressources)
 	
 	_stone_label.text = String(_ressources.stone)
 	_wood_label.text = String(_ressources.wood)
@@ -26,7 +25,7 @@ func _load_game() -> void:
 
 func _save_game() ->void:
 	var save_file := File.new()
-	var error = save_file.open_encrypted_with_pass(_save_path, File.WRITE, "McLovin")
+	var _error = save_file.open_encrypted_with_pass(_save_path, File.WRITE, "McLovin")
 	save_file.store_line(to_json(_ressources))
 	save_file.close()
 
