@@ -14,11 +14,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Bobber/Scripts/Bobber.gd"
 }, {
-"base": "Node2D",
-"class": "GameManager",
-"language": "GDScript",
-"path": "res://GameManager/Scripts/GameManager.gd"
-}, {
 "base": "KinematicBody2D",
 "class": "PlayerShip",
 "language": "GDScript",
@@ -36,7 +31,6 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Bobber": "",
-"GameManager": "",
 "PlayerShip": "",
 "QuickTimeEvent": "",
 "RandomFish": ""
@@ -48,6 +42,10 @@ config/name="Calderia"
 run/main_scene="res://TestScene.tscn"
 boot_splash/bg_color=Color( 0.141176, 0.141176, 0.141176, 1 )
 config/icon="res://icon.png"
+
+[autoload]
+
+GameManager="*res://GameManager/GameManager.tscn"
 
 [debug]
 

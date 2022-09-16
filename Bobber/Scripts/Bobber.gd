@@ -5,11 +5,15 @@ var _random_fish := preload("res://RandomFish/RandomFish.tscn")
 onready var _quick_time_event := preload("res://QuickTimeEvent/QuickTimeEvent.tscn")
 onready var _caught_timer : Timer = $CaughtTimer
 
-export var _bite_rate_per_frame := 0.15
-var _fish_size_max_percentage := 0.5
+export var base_ressource_amount := 25
+var _bite_rate_per_frame := 0.15
+var _fish_size_max_percentage := 0.3
 var _hooked := false
+var _fish_size := 0.0
 
 func _ready() -> void:
+	while _fish_size == 0.0:
+		_fish_size = rand_range(1 - _fish_size_max_percentage, 1 + _fish_size_max_percentage)
 	randomize()
 
 func _unhandled_input(event) -> void:
@@ -17,11 +21,10 @@ func _unhandled_input(event) -> void:
 		var instance = _quick_time_event.instance()
 		instance.connect("quick_time_event_succeeded", self, "_fish_caught")
 		instance.connect("quick_time_event_failed", self, "_fish_escaped")
-		instance.frames_per_second *= rand_range(1 - _fish_size_max_percentage, 1 + _fish_size_max_percentage)
+		instance.frames_per_second *= _fish_size
 		add_child(instance)
 	
 	elif not _hooked and event.is_action_pressed("left_click"):
-		print("Cancelled")
 		queue_free()
 
 func _on_RandomTimer_timeout() -> void:
@@ -36,8 +39,12 @@ func _on_CaughtTimer_timeout() -> void:
 
 func _fish_caught() -> void:
 	var instance : RandomFish = _random_fish.instance()
-	instance.position = position
 	get_parent().add_child(instance)
+	instance.position = position
+	if instance.texture.resource_path.find("Wood") != -1:
+		GameManager.add_wood(int(base_ressource_amount * _fish_size))
+	if instance.texture.resource_path.find("Stone") != -1:
+		GameManager.add_stone(int(base_ressource_amount * _fish_size))
 	queue_free()
 
 func _fish_escaped() -> void:

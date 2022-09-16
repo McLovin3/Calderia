@@ -24,7 +24,6 @@ func _get_random_mouse_button() -> void:
 	
 	_animated_sprites.frames.set_animation_speed(_animation_name, frames_per_second)
 	_timer.set_wait_time(_animated_sprites.frames.get_frame_count(_animation_name) / frames_per_second)
-	
 	_animated_sprites.play(_animation_name)
 	_timer.start()
 

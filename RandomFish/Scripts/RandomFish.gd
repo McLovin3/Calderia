@@ -26,3 +26,4 @@ func _ready():
 
 func _on_TTL_timeout():
 	queue_free()
+
