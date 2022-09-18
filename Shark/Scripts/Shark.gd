@@ -19,8 +19,8 @@ func _ready() -> void:
 
 func _physics_process(delta : float) -> void:
 	var direction := global_position.direction_to(_navigation_agent.get_next_location())
-	var desired_velocity = direction * speed
-	var steering = (desired_velocity - _velocity) * delta
+	var desired_velocity := direction * speed
+	var steering := (desired_velocity - _velocity) * delta
 	_velocity += steering
 	
 	if global_position.distance_to(_player.get_global_position()) < attack_distance:
