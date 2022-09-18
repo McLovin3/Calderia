@@ -28,12 +28,18 @@ _global_script_classes=[ {
 "class": "RandomFish",
 "language": "GDScript",
 "path": "res://RandomFish/Scripts/RandomFish.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Shark",
+"language": "GDScript",
+"path": "res://Shark/Scripts/Shark.gd"
 } ]
 _global_script_class_icons={
 "Bobber": "",
 "PlayerShip": "",
 "QuickTimeEvent": "",
-"RandomFish": ""
+"RandomFish": "",
+"Shark": ""
 }
 
 [application]

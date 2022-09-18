@@ -49,3 +49,4 @@ polygon = PoolVector2Array( -26, 13, -23, 40, -20, 59, -8, 64, 8, 64, 20, 59, 23
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
+zoom = Vector2( 1.2, 1.2 )
