@@ -8,7 +8,7 @@ onready var _timer : Timer = $Timer
 export var time_to_live : int = 5
 export var damage : int = 10
 export var rotation_speed : int = 5
-export var speed : int = 10
+export var speed : int = 500
 
 var direction : Vector2 = Vector2.ZERO
 
