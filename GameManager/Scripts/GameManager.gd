@@ -5,6 +5,7 @@ var _ressources := {"wood" : 0, "stone" : 0}
 
 onready var _stone_label : Label = $HUD/Stone/StoneCount
 onready var _wood_label : Label = $HUD/Wood/WoodCount
+onready var _health_bar : ProgressBar = $HUD/HealthBar
 
 func _ready() -> void:
 	_load_game()
@@ -38,7 +39,10 @@ func add_wood(amount: int) -> void:
 	_ressources.wood += amount
 	_update_labels()
 	_save_game()
-	
+
+func set_hp(current_health : int, max_health : int) -> void:
+	_health_bar.value = (current_health * _health_bar.max_value) / max_health 
+
 func add_stone(amount: int) -> void:
 	_ressources.stone += amount
 	_update_labels()

@@ -3,15 +3,21 @@ class_name PlayerShip
 
 var _bobber = preload("res://Bobber/Bobber.tscn")
 
-export var max_speed := 20000
-export var acceleration := 0.001
-export var friction := 0.005
-export var wall_slow_multiplier := 0.1
-export var min_fish_speed := 2000
-export var bite_rate := 0.15
+export var max_speed : int = 20000
+export var acceleration : float = 0.001
+export var friction : float = 0.005
+export var wall_slow_multiplier : float = 0.1
+export var min_fish_speed : int = 2000
+export var bite_rate : float = 0.15
+export var base_hp : int = 100
 
-var _fishing = false
-var _velocity := 0
+var _fishing : bool = false
+var _velocity : int = 0
+var _current_hp : int
+
+func _ready() -> void:
+	_current_hp = base_hp
+	GameManager.set_hp(_current_hp, base_hp)
 
 func _unhandled_input(event) -> void:
 	#https://godotengine.org/qa/80382/is-it-possible-to-detect-if-mouse-pointer-hovering-over-area
