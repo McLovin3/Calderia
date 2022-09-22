@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Shark/Scripts/Shark.gd" type="Script" id=1]
 [ext_resource path="res://Shark/Sprites/SharkSurfacing-Sheet.png" type="Texture" id=2]
+[ext_resource path="res://Themes/HealthBar.tres" type="Theme" id=3]
 
 [sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 2 )
@@ -57,4 +58,25 @@ shape = SubResource( 8 )
 wait_time = 0.05
 autostart = true
 
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource( 8 )
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 35.9999
+margin_top = 32.0001
+margin_right = 111.0
+margin_bottom = 42.0001
+rect_rotation = -180.0
+theme = ExtResource( 3 )
+value = 100.0
+percent_visible = false
+
 [connection signal="timeout" from="PathFindingTimer" to="." method="_on_PathFindingTimer_timeout"]
+[connection signal="area_entered" from="Hitbox" to="." method="_on_Hitbox_area_entered"]

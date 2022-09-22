@@ -18,4 +18,9 @@ collision_layer = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource( 1 )
 
-[node name="Timer" type="Timer" parent="."]
+[node name="TTL" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_Hitbox_area_entered"]
+[connection signal="timeout" from="TTL" to="." method="_on_TTL_timeout"]

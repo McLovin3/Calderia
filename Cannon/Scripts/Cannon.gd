@@ -11,7 +11,6 @@ var _shoot_key : String
 
 func _ready() -> void:
 	_shoot_key = "right_arrow" if is_starboard else "left_arrow"
-	_animated_sprite.connect("animation_finished", self, "_animation_finished")
 
 func _unhandled_input(event : InputEvent) -> void:
 	if (event.is_action_pressed(_shoot_key)):
@@ -24,7 +23,7 @@ func _unhandled_input(event : InputEvent) -> void:
 		_animated_sprite.play("Idle")
 
 
-func _animation_finished() -> void:
+func _on_AnimatedSprite_animation_finished():
 	if (_animated_sprite.animation == "Fire"):
 		var instance = _cannon_ball.instance()
 		instance.position = _projectile_spawn.global_position

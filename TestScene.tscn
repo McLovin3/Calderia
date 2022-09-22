@@ -7,9 +7,9 @@
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Tilemaps" parent="." instance=ExtResource( 2 )]
+[node name="Navigation2D" parent="." instance=ExtResource( 2 )]
 
-[node name="Shark" parent="Tilemaps" instance=ExtResource( 3 )]
+[node name="Shark" parent="Navigation2D" instance=ExtResource( 3 )]
 position = Vector2( 213, -65 )
 path_to_player = NodePath("../../Player")
 

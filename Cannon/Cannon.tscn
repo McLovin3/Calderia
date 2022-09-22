@@ -71,3 +71,5 @@ animation = "Idle"
 
 [node name="ProjectileSpawn" type="Position2D" parent="."]
 position = Vector2( 4, 0.200001 )
+
+[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
