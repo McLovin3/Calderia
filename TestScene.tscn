@@ -9,7 +9,7 @@
 [node name="Tilemaps" parent="." instance=ExtResource( 2 )]
 
 [node name="Shark" parent="Tilemaps" instance=ExtResource( 3 )]
-position = Vector2( 91, -23 )
+position = Vector2( 213, -65 )
 path_to_player = NodePath("../../Player")
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
