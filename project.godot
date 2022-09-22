@@ -17,7 +17,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "Cannon",
 "language": "GDScript",
-"path": "res://Cannon/Cannon.gd"
+"path": "res://Cannon/Scripts/Cannon.gd"
 }, {
 "base": "Node2D",
 "class": "CannonBall",
