@@ -5,6 +5,7 @@ export var path_to_player : NodePath = NodePath()
 export var speed : int = 50
 export var attack_distance : int = 500
 export var base_hp : int = 20
+export var damage : int = 10
 
 onready var _player : PlayerShip = get_node(path_to_player); 
 onready var _navigation_agent : NavigationAgent2D = $NavigationAgent2D
@@ -51,3 +52,6 @@ func _on_Hitbox_area_entered(area: Area2D) -> void:
 		else:
 			_health_bar.visible = true
 			_health_bar.value = (_current_hp * _health_bar.max_value) / base_hp 
+	
+	else:
+		position -= global_position.direction_to(_navigation_agent.get_next_location()) * 200

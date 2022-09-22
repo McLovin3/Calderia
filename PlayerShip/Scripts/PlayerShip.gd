@@ -2,6 +2,7 @@ extends KinematicBody2D
 class_name PlayerShip
 
 var _bobber = preload("res://Bobber/Bobber.tscn")
+onready var _hit_box : Area2D = $HitBox
 
 export var max_speed : int = 20000
 export var acceleration : float = 0.001
@@ -57,3 +58,15 @@ func _rotate(delta : float) -> void:
 	if not _fishing:
 		var percentage_of_max_speed := _velocity as float / max_speed
 		rotation = lerp(rotation, Input.get_axis("turn_left", "turn_right") * delta + rotation, percentage_of_max_speed)
+
+
+func _on_HitBox_area_entered(area : Area2D) -> void:
+	if (area.get_parent().get("damage")):
+		_current_hp -= area.get_parent().damage
+		
+		if (_current_hp <= 0):
+			queue_free()
+		
+		else:
+			GameManager.set_hp(_current_hp, base_hp)
+
