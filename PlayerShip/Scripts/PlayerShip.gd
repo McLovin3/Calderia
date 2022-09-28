@@ -3,6 +3,7 @@ class_name PlayerShip
 
 var _bobber = preload("res://Bobber/Bobber.tscn")
 onready var _hit_box : Area2D = $HitBox
+onready var _dash_timer : Timer = $DashCooldown
 
 export var max_speed : int = 20000
 export var acceleration : float = 0.001
@@ -37,6 +38,7 @@ func _stopped_fishing(__) -> void:
 	_fishing = false
 
 func _physics_process(delta : float) -> void:
+	_check_dash()
 	_rotate(delta)
 	var _unused_velocity = move_and_slide(_get_direction(delta))
 
@@ -59,6 +61,14 @@ func _rotate(delta : float) -> void:
 		var percentage_of_max_speed := _velocity as float / max_speed
 		rotation = lerp(rotation, Input.get_axis("turn_left", "turn_right") * delta + rotation, percentage_of_max_speed)
 
+
+func _check_dash() -> void:
+	
+	
+	if ( _dash_timer.is_stopped()):
+		_dash_timer.start()
+		# Dash
+	
 
 func _on_HitBox_area_entered(area : Area2D) -> void:
 	if (area.get_parent().get("damage")):

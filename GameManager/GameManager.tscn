@@ -1,9 +1,16 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://GameManager/Scripts/GameManager.gd" type="Script" id=1]
 [ext_resource path="res://GameManager/Sprites/Stone.png" type="Texture" id=2]
 [ext_resource path="res://GameManager/Sprites/Wood.png" type="Texture" id=3]
 [ext_resource path="res://Themes/HealthBar.tres" type="Theme" id=4]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.2, 0.533333, 0.870588, 1 )
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
 
 [node name="GameManager" type="Node2D"]
 position = Vector2( 2, 2 )
@@ -71,6 +78,17 @@ margin_top = 20.0
 margin_right = -30.0
 margin_bottom = 75.0
 theme = ExtResource( 4 )
+percent_visible = false
+
+[node name="DashBar" type="ProgressBar" parent="HUD"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -92.0
+margin_top = 20.0
+margin_right = 178.001
+margin_bottom = 75.0
+theme = ExtResource( 4 )
+custom_styles/fg = SubResource( 1 )
 percent_visible = false
 
 [connection signal="timeout" from="SaveInterval" to="." method="_on_SaveInterval_timeout"]

@@ -42,7 +42,7 @@ script = ExtResource( 2 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 7 )
 animation = "idle"
-frame = 2
+frame = 3
 playing = true
 
 [node name="HitBox" type="Area2D" parent="."]
@@ -58,5 +58,9 @@ polygon = PoolVector2Array( -26, 13, -23, 40, -20, 59, -8, 64, 8, 64, 20, 59, 23
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 zoom = Vector2( 1.2, 1.2 )
+
+[node name="DashCooldown" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
 
 [connection signal="area_entered" from="HitBox" to="." method="_on_HitBox_area_entered"]
