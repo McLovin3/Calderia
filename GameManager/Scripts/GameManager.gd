@@ -41,10 +41,10 @@ func add_wood(amount: int) -> void:
 	_update_labels()
 	_save_game()
 
-func set_hp(current_health : int, max_health : int) -> void:
+func set_hp(current_health : float, max_health : float) -> void:
 	_health_bar.value = (current_health * _health_bar.max_value) / max_health 
 
-func set_dash(current_dash : int, max_dash : int) -> void:
+func set_dash(current_dash : float, max_dash : float) -> void:
 	_dash_bar.value = (current_dash * _dash_bar.max_value) / max_dash
 
 func add_stone(amount: int) -> void:

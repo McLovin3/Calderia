@@ -27,6 +27,7 @@ margin_left = 20.0
 margin_top = 20.0
 margin_right = 170.0
 margin_bottom = 80.0
+hint_tooltip = "Bois"
 
 [node name="WoodSprite" type="TextureRect" parent="HUD/Wood"]
 margin_left = 6.0
@@ -51,6 +52,7 @@ margin_left = 182.0
 margin_top = 20.0
 margin_right = 332.0
 margin_bottom = 80.0
+hint_tooltip = "Pierre"
 
 [node name="StoneSprite" type="TextureRect" parent="HUD/Stone"]
 margin_left = 6.0
@@ -77,6 +79,7 @@ margin_left = -300.0
 margin_top = 20.0
 margin_right = -30.0
 margin_bottom = 75.0
+hint_tooltip = "Vie"
 theme = ExtResource( 4 )
 percent_visible = false
 
@@ -87,6 +90,7 @@ margin_left = -92.0
 margin_top = 20.0
 margin_right = 178.001
 margin_bottom = 75.0
+hint_tooltip = "Énergie"
 theme = ExtResource( 4 )
 custom_styles/fg = SubResource( 1 )
 percent_visible = false
