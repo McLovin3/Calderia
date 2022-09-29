@@ -17,14 +17,14 @@ func _ready() -> void:
 	randomize()
 
 func _unhandled_input(event) -> void:
-	if _hooked and event.is_action_pressed("left_click"):
+	if _hooked and event.is_action_pressed("fish"):
 		var instance = _quick_time_event.instance()
 		instance.connect("quick_time_event_succeeded", self, "_fish_caught")
 		instance.connect("quick_time_event_failed", self, "_fish_escaped")
 		instance.frames_per_second *= _fish_size
 		add_child(instance)
 	
-	elif not _hooked and event.is_action_pressed("left_click"):
+	elif not _hooked and event.is_action_pressed("fish"):
 		queue_free()
 
 func _on_RandomTimer_timeout() -> void:

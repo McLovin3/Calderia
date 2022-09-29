@@ -29,7 +29,7 @@ func _get_random_mouse_button() -> void:
 
 func _unhandled_input(event) -> void:
 	if event is InputEventMouseButton or event is InputEventKey:
-		if _animation_name == "LeftClick" and event.is_action_pressed("left_click"):
+		if _animation_name == "LeftClick" and event.is_action("left_click"):
 			emit_signal("quick_time_event_succeeded")
 		
 		elif _animation_name == "RightClick" and event.is_action_pressed("right_click"):

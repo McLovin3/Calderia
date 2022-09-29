@@ -5,21 +5,14 @@ onready var _cannon_ball : PackedScene = preload("res://CannonBall/CannonBall.ts
 onready var _projectile_spawn : Position2D = $ProjectileSpawn
 onready var _animated_sprite : AnimatedSprite = $AnimatedSprite
 
-export var is_starboard : bool = true
-
-var _shoot_key : String
-
-func _ready() -> void:
-	_shoot_key = "right_arrow" if is_starboard else "left_arrow"
-
 func _unhandled_input(event : InputEvent) -> void:
-	if (event.is_action_pressed(_shoot_key)):
+	if (event.is_action_pressed("shoot")):
 		_animated_sprite.play("ChargeUp")
 	
-	elif (event.is_action_released(_shoot_key) and not _animated_sprite.playing):
+	elif (event.is_action_released("shoot") and not _animated_sprite.playing):
 		_animated_sprite.play("Fire")
 	
-	elif (event.is_action_released(_shoot_key) and _animated_sprite.playing):
+	elif (event.is_action_released("shoot") and _animated_sprite.playing):
 		_animated_sprite.play("Idle")
 
 
