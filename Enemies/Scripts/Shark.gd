@@ -4,7 +4,7 @@ class_name Shark
 export var path_to_player : NodePath = NodePath() 
 export var speed : int = 50
 export var attack_distance : int = 500
-export var base_hp : int = 20
+export var base_hp : int = 30
 export var damage : int = 10
 export var knockback_distance : int = 200
 export var knockback_time : float = 1

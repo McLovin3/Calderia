@@ -1,5 +1,5 @@
 extends Node2D
-class_name CannonBall
+class_name Projectile
 
 onready var _sprite : Sprite = $Sprite
 

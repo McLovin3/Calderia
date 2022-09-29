@@ -1,0 +1,81 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Themes/HealthBar.tres" type="Theme" id=1]
+[ext_resource path="res://Enemies/Sprites/WaterSnake-Sheet.png" type="Texture" id=2]
+[ext_resource path="res://Enemies/Scripts/WaterSnake.gd" type="Script" id=3]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 2 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=5]
+radius = 16.0
+height = 26.0
+
+[node name="KinematicBody2D" type="KinematicBody2D"]
+scale = Vector2( 2, 2 )
+script = ExtResource( 3 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 4 )
+frame = 1
+playing = true
+
+[node name="ProjectileSpawn" type="Position2D" parent="AnimatedSprite"]
+position = Vector2( 40, 0 )
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -3, 0 )
+rotation = 1.5708
+shape = SubResource( 5 )
+
+[node name="PathFindingTimer" type="Timer" parent="."]
+wait_time = 0.05
+autostart = true
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 38.0
+margin_top = -24.0
+margin_right = 113.0
+margin_bottom = -14.0
+rect_rotation = -180.0
+theme = ExtResource( 1 )
+value = 100.0
+percent_visible = false
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2( -3, 0 )
+rotation = 1.5708
+shape = SubResource( 5 )
+
+[node name="ShootTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="timeout" from="PathFindingTimer" to="." method="_on_PathFindingTimer_timeout"]
+[connection signal="area_entered" from="Hitbox" to="." method="_on_Hitbox_area_entered"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_ShootTimer_timeout"]

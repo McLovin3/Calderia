@@ -19,15 +19,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Cannon/Scripts/Cannon.gd"
 }, {
-"base": "Node2D",
-"class": "CannonBall",
-"language": "GDScript",
-"path": "res://Projectiles/Scripts/Projectile.gd"
-}, {
 "base": "KinematicBody2D",
 "class": "PlayerShip",
 "language": "GDScript",
 "path": "res://PlayerShip/Scripts/PlayerShip.gd"
+}, {
+"base": "Node2D",
+"class": "Projectile",
+"language": "GDScript",
+"path": "res://Projectiles/Scripts/Projectile.gd"
 }, {
 "base": "Control",
 "class": "QuickTimeEvent",
@@ -43,15 +43,21 @@ _global_script_classes=[ {
 "class": "Shark",
 "language": "GDScript",
 "path": "res://Enemies/Scripts/Shark.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "WaterSnake",
+"language": "GDScript",
+"path": "res://Enemies/Scripts/WaterSnake.gd"
 } ]
 _global_script_class_icons={
 "Bobber": "",
 "Cannon": "",
-"CannonBall": "",
 "PlayerShip": "",
+"Projectile": "",
 "QuickTimeEvent": "",
 "RandomFish": "",
-"Shark": ""
+"Shark": "",
+"WaterSnake": ""
 }
 
 [application]
