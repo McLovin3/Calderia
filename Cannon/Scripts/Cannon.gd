@@ -1,7 +1,7 @@
 extends Node2D
 class_name Cannon
 
-onready var _cannon_ball : PackedScene = preload("res://CannonBall/CannonBall.tscn")
+onready var _cannon_ball : PackedScene = preload("res://Projectiles/CannonBall.tscn")
 onready var _projectile_spawn : Position2D = $ProjectileSpawn
 onready var _animated_sprite : AnimatedSprite = $AnimatedSprite
 

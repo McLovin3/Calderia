@@ -22,7 +22,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "CannonBall",
 "language": "GDScript",
-"path": "res://CannonBall/Scripts/CannonBall.gd"
+"path": "res://Projectiles/Scripts/Projectile.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "PlayerShip",
@@ -42,7 +42,7 @@ _global_script_classes=[ {
 "base": "KinematicBody2D",
 "class": "Shark",
 "language": "GDScript",
-"path": "res://Shark/Scripts/Shark.gd"
+"path": "res://Enemies/Scripts/Shark.gd"
 } ]
 _global_script_class_icons={
 "Bobber": "",

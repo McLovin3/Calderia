@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/SharkSurfacing-Sheet.png-88919f6bb5b9049ef341e79e033d7863.stex"
+path="res://.import/WaterSnake-Sheet.png-a835dbd5b6f291c43120cd85434da865.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Shark/Sprites/SharkSurfacing-Sheet.png"
-dest_files=[ "res://.import/SharkSurfacing-Sheet.png-88919f6bb5b9049ef341e79e033d7863.stex" ]
+source_file="res://Projectiles/Sprites/WaterSnake-Sheet.png"
+dest_files=[ "res://.import/WaterSnake-Sheet.png-a835dbd5b6f291c43120cd85434da865.stex" ]
 
 [params]
 

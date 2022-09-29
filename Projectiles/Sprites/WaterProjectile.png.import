@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/CannonBall.png-0d2d2558e47f7a665fa5ac31bc171135.stex"
+path="res://.import/WaterProjectile.png-fda34b17851bdb2914ec04763047246a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://CannonBall/Sprites/CannonBall.png"
-dest_files=[ "res://.import/CannonBall.png-0d2d2558e47f7a665fa5ac31bc171135.stex" ]
+source_file="res://Projectiles/Sprites/WaterProjectile.png"
+dest_files=[ "res://.import/WaterProjectile.png-fda34b17851bdb2914ec04763047246a.stex" ]
 
 [params]
 
