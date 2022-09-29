@@ -84,11 +84,11 @@ theme = ExtResource( 4 )
 percent_visible = false
 
 [node name="DashBar" type="ProgressBar" parent="HUD"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -92.0
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -600.0
 margin_top = 20.0
-margin_right = 178.001
+margin_right = -330.0
 margin_bottom = 75.0
 hint_tooltip = "Énergie"
 theme = ExtResource( 4 )

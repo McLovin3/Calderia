@@ -42,7 +42,7 @@ script = ExtResource( 2 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 7 )
 animation = "idle"
-frame = 3
+frame = 4
 playing = true
 
 [node name="HitBox" type="Area2D" parent="."]
@@ -61,6 +61,6 @@ zoom = Vector2( 1.2, 1.2 )
 
 [node name="DashCooldown" type="Timer" parent="."]
 wait_time = 3.0
-autostart = true
+one_shot = true
 
 [connection signal="area_entered" from="HitBox" to="." method="_on_HitBox_area_entered"]
