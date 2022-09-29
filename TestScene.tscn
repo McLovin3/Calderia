@@ -10,7 +10,7 @@
 [node name="Navigation2D" parent="." instance=ExtResource( 2 )]
 
 [node name="Shark" parent="Navigation2D" instance=ExtResource( 3 )]
-position = Vector2( -463, 197 )
+position = Vector2( -860, 171 )
 path_to_player = NodePath("../../Player")
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
