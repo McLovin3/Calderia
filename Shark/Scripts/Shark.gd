@@ -6,6 +6,8 @@ export var speed : int = 50
 export var attack_distance : int = 500
 export var base_hp : int = 20
 export var damage : int = 10
+export var knockback_distance : int = 200
+export var knockback_time : float = 1
 
 onready var _player : PlayerShip = get_node(path_to_player); 
 onready var _navigation_agent : NavigationAgent2D = $NavigationAgent2D
@@ -14,8 +16,11 @@ onready var _health_bar : ProgressBar = $HealthBar
 
 var _velocity : Vector2 = Vector2.ZERO
 var _chasing : bool = false
-
+var _getting_knockbacked : bool = false
 var _current_hp : int
+var _time : float = 0
+var _from : Vector2 = Vector2.ZERO
+var _to : Vector2 = Vector2.ZERO
 
 func _ready() -> void:
 	randomize()
@@ -28,7 +33,13 @@ func _physics_process(delta : float) -> void:
 	var steering := (desired_velocity - _velocity) * delta
 	_velocity += steering
 	
-	if global_position.distance_to(_player.get_global_position()) < attack_distance:
+	if (_getting_knockbacked):
+		_time += delta
+		if (_time >= knockback_time):
+			_getting_knockbacked = false
+		position = _from.linear_interpolate(_to, _time)
+	
+	elif global_position.distance_to(_player.get_global_position()) < attack_distance:
 		_chasing = true
 		_animated_sprite.rotation = direction.angle()
 		_animated_sprite.play("Emerging")
@@ -40,7 +51,8 @@ func _physics_process(delta : float) -> void:
 		_animated_sprite.play("Emerging", true)
 
 func _on_PathFindingTimer_timeout() -> void:
-	_navigation_agent.set_target_location(_player.global_position)
+	if (_player):
+		_navigation_agent.set_target_location(_player.global_position)
 
 func _on_Hitbox_area_entered(area: Area2D) -> void:
 	if (area.get_parent().get("damage")):
@@ -54,4 +66,8 @@ func _on_Hitbox_area_entered(area: Area2D) -> void:
 			_health_bar.value = (_current_hp * _health_bar.max_value) / base_hp 
 	
 	else:
-		position -= global_position.direction_to(_navigation_agent.get_next_location()) * 200
+		_getting_knockbacked = true
+		_time = 0
+		_from = position
+		_to = position - knockback_distance * Vector2(
+			global_position.direction_to(area.global_position)).normalized()
