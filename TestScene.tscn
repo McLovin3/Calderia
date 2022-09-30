@@ -8,6 +8,7 @@
 [node name="Node2D" type="Node2D"]
 
 [node name="Navigation2D" parent="." instance=ExtResource( 2 )]
+position = Vector2( 11, -20 )
 
 [node name="KinematicBody2D" parent="Navigation2D" instance=ExtResource( 3 )]
 position = Vector2( -852, 196 )

@@ -1,15 +1,15 @@
 extends AnimatedSprite
 class_name Bobber
 
-var _random_fish := preload("res://RandomFish/RandomFish.tscn") 
-onready var _quick_time_event := preload("res://QuickTimeEvent/QuickTimeEvent.tscn")
+var _random_fish : PackedScene = preload("res://RandomFish/RandomFish.tscn") 
+onready var _quick_time_event : PackedScene = preload("res://QuickTimeEvent/QuickTimeEvent.tscn")
 onready var _caught_timer : Timer = $CaughtTimer
 
-export var base_ressource_amount := 25
-var _bite_rate_per_frame := 0.15
-var _fish_size_max_percentage := 0.3
-var _hooked := false
-var _fish_size := 0.0
+export var base_ressource_amount : int = 25
+var _bite_rate_per_frame : float = 0.15
+var _fish_size_max_percentage : float = 0.3
+var _hooked : bool = false
+var _fish_size : float = 0.0
 
 func _ready() -> void:
 	while _fish_size == 0.0:

@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://PlayerShip/Sprites/DefaultPlayerShip-Sheet.png" type="Texture" id=1]
 [ext_resource path="res://PlayerShip/Scripts/PlayerShip.gd" type="Script" id=2]
+[ext_resource path="res://ZoomingCamera/ZoomingCamera2D.tscn" type="PackedScene" id=3]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
@@ -42,7 +43,6 @@ script = ExtResource( 2 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 7 )
 animation = "idle"
-frame = 3
 playing = true
 
 [node name="HitBox" type="Area2D" parent="."]
@@ -55,12 +55,10 @@ polygon = PoolVector2Array( -26, 13, -23, 40, -20, 59, -8, 64, 8, 64, 20, 59, 23
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PoolVector2Array( -26, 13, -23, 40, -20, 59, -8, 64, 8, 64, 20, 59, 23, 40, 26, 13, 25, -14, 21, -33, 13, -49, 0, -57, -13, -49, -21, -33, -25, -14 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
-current = true
-zoom = Vector2( 1.2, 1.2 )
-
 [node name="DashCooldown" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
+
+[node name="Camera2D" parent="." instance=ExtResource( 3 )]
 
 [connection signal="area_entered" from="HitBox" to="." method="_on_HitBox_area_entered"]

@@ -21,7 +21,6 @@ var _velocity : int = 0
 var _direction : Vector2 = Vector2.ZERO
 var _current_hp : int
 var _dashing : bool = false
-
 var _from : Vector2
 var _to : Vector2
 var _time : float = 0
@@ -31,13 +30,13 @@ func _ready() -> void:
 	_dash_timer.start()
 	GameManager.set_hp(_current_hp, base_hp)
 
-func _unhandled_input(event) -> void:
+func _unhandled_input(event : InputEvent) -> void:
 	#https://godotengine.org/qa/80382/is-it-possible-to-detect-if-mouse-pointer-hovering-over-area
 	var space = get_world_2d().direct_space_state
 	
 	if not space.intersect_point(get_global_mouse_position()):
 		if not _fishing and event.is_action_pressed("fish") && _velocity <= min_fish_speed:
-			var instance = _bobber.instance()
+			var instance : Bobber = _bobber.instance()
 			get_parent().add_child(instance)
 			instance.position = get_parent().get_local_mouse_position()
 			instance._bite_rate_per_frame = bite_rate
@@ -48,9 +47,11 @@ func _stopped_fishing(__) -> void:
 	_fishing = false
 
 func _physics_process(delta : float) -> void:
+	if not _fishing:
+		_manage_dash(delta)
+	
 	_rotate(delta)
 	_calculate_direction()
-	_manage_dash(delta)
 	var _unused_velocity = move_and_slide(_direction * _velocity)
 
 func _calculate_direction() -> void:
