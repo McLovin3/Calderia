@@ -92,7 +92,6 @@ func _manage_dash(delta : float) -> void:
 		if (_time >= dash_time):
 			_dashing = false
 		position = _from.linear_interpolate(_to, _time)
-	
 
 func _on_HitBox_area_entered(area : Area2D) -> void:
 	if (area.get_parent().get("damage")):

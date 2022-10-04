@@ -43,6 +43,7 @@ script = ExtResource( 2 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 7 )
 animation = "idle"
+frame = 5
 playing = true
 
 [node name="HitBox" type="Area2D" parent="."]

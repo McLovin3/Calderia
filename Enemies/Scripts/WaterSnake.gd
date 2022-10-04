@@ -52,7 +52,6 @@ func _on_Hitbox_area_entered(area: Area2D) -> void:
 			_health_bar.visible = true
 			_health_bar.value = (_current_hp * _health_bar.max_value) / base_hp 
 
-
 func _on_ShootTimer_timeout():
 	if (_distance_to_player < attack_distance):
 		var instance : Projectile  = _water_ball.instance()
