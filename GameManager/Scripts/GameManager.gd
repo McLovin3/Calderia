@@ -1,12 +1,13 @@
 extends Node2D
 
-var _save_path = "user://savegame.save"
-var _ressources := {"wood" : 0, "stone" : 0}
-
+onready var _customization_menu: CustomizationMenu = $HUD/CustomizationMenu
 onready var _stone_label : Label = $HUD/Stone/StoneCount
 onready var _wood_label : Label = $HUD/Wood/WoodCount
 onready var _health_bar : ProgressBar = $HUD/HealthBar
 onready var _dash_bar : ProgressBar = $HUD/DashBar
+
+var _save_path = "user://savegame.save"
+var _ressources := {"wood" : 0, "stone" : 0}
 
 func _ready() -> void:
 	_load_game()
@@ -51,3 +52,6 @@ func add_stone(amount: int) -> void:
 	_ressources.stone += amount
 	_update_labels()
 	_save_game()
+
+func set_player(player: PlayerShip) -> void:
+	_customization_menu.player = player

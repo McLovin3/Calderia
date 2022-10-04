@@ -1,8 +1,12 @@
 extends Control
+class_name CustomizationMenu
 
 export var tween_duration : float = 0.2
 export var tween_final_position : Vector2 = Vector2(75, 0)
 
+var player : PlayerShip
+
+var _cannon : PackedScene = preload("res://Cannon/Cannon.tscn")
 onready var _left_panel : OptionButton = $LeftItem
 onready var _right_panel : OptionButton = $RightItem
 onready var _left_tween : Tween = $LeftItem/Tween
@@ -47,10 +51,16 @@ func _on_Tween_tween_all_completed():
 	if not _inventory_open:
 		visible = false
 
+func _on_LeftItem_item_selected(index: int) -> void:
+	if player:
+		if index == 0:
+			player.clear_left_tool()
+		elif index == 1:
+			player.set_left_tool(_cannon)
 
-func _on_LeftItem_item_selected(index):
-	pass # Replace with function body.
-
-
-func _on_RightItem_item_selected(index):
-	pass # Replace with function body.
+func _on_RightItem_item_selected(index: int) -> void:
+	if player:
+		if index == 0:
+			player.clear_right_tool()
+		elif index == 1:
+			player.set_right_tool(_cannon)

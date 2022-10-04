@@ -63,6 +63,7 @@ animations = [ {
 } ]
 
 [node name="Node2D" type="Node2D"]
+scale = Vector2( 1.5, 1.5 )
 script = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]

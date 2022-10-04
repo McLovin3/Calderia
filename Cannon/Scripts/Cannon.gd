@@ -21,7 +21,7 @@ func _on_AnimatedSprite_animation_finished():
 		var instance = _cannon_ball.instance()
 		instance.position = _projectile_spawn.global_position
 		instance.direction = Vector2(cos(global_rotation), sin(global_rotation))
-		add_child(instance)
+		get_parent().add_child(instance)
 	
 	elif (_animated_sprite.animation == "ChargeUp"):
 		_animated_sprite.stop()

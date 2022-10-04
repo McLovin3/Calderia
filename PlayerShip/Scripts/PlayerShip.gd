@@ -15,6 +15,7 @@ export var base_hp : int = 100
 export var dash_speed : int = 1000
 export var dash_time : float = 0.15
 export var dash_distance : float = 1000
+export var tool_position : Vector2 = Vector2(30.5, 5)
 
 var _fishing : bool = false
 var _velocity : int = 0
@@ -24,10 +25,13 @@ var _dashing : bool = false
 var _from : Vector2
 var _to : Vector2
 var _time : float = 0
+var _left_tool : Node
+var _right_tool : Node
 
 func _ready() -> void:
 	_current_hp = base_hp
 	_dash_timer.start()
+	GameManager.set_player(self)
 	GameManager.set_hp(_current_hp, base_hp)
 
 func _unhandled_input(event : InputEvent) -> void:
@@ -103,3 +107,24 @@ func _on_HitBox_area_entered(area : Area2D) -> void:
 		else:
 			GameManager.set_hp(_current_hp, base_hp)
 
+
+func clear_right_tool() -> void:
+	if is_instance_valid(_right_tool):
+		_right_tool.queue_free()
+
+func set_right_tool(toolScene : PackedScene) -> void:
+	clear_right_tool()
+	_right_tool = toolScene.instance()
+	add_child(_right_tool) 
+	_right_tool.position = tool_position
+
+func clear_left_tool() -> void:
+	if is_instance_valid(_left_tool):
+		_left_tool.queue_free()
+
+func set_left_tool(toolScene : PackedScene) -> void:
+	clear_left_tool()
+	_left_tool = toolScene.instance()
+	add_child(_left_tool)
+	_left_tool.rotation_degrees = -180
+	_left_tool.position = tool_position * Vector2(-1, 1)
