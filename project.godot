@@ -22,7 +22,7 @@ _global_script_classes=[ {
 "base": "Control",
 "class": "CustomizationMenu",
 "language": "GDScript",
-"path": "res://CustomizationMenu/Scripts/CustomizationMenu.gd"
+"path": "res://GameManager/Scripts/CustomizationMenu.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "PlayerShip",
