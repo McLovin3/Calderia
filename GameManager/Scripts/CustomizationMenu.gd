@@ -78,6 +78,7 @@ func _select_item(is_right: bool, index: int) -> void:
 				_last_selected_item.wood = tools.cannon.wood
 				_last_selected_item.stone = tools.cannon.stone
 				_last_selected_item.name = "cannon"
+				_right_button.selected = 0
 				_dialog.popup()
 			else:
 				player.set_right_tool(_cannon) if is_right else player.set_left_tool(_cannon)
