@@ -1,9 +1,16 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://RandomFish/Scripts/RandomFish.gd" type="Script" id=1]
+[ext_resource path="res://RandomFish/Sprites/HighlightCircle.png" type="Texture" id=2]
 
 [node name="Fish" type="Sprite"]
+z_index = 1
 script = ExtResource( 1 )
+
+[node name="Background" type="Sprite" parent="."]
+scale = Vector2( 1.2, 1.2 )
+z_as_relative = false
+texture = ExtResource( 2 )
 
 [node name="TTL" type="Timer" parent="."]
 wait_time = 3.0

@@ -16,7 +16,7 @@ func _ready():
 		if current_file == "":
 			break;
 		
-		elif current_file.ends_with(".png"):
+		elif current_file.ends_with("Fish.png"):
 			fish_sprites.append(current_file)
 	
 	randomize()
