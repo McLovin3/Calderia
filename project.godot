@@ -75,7 +75,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Calderia"
-run/main_scene="res://TestScene.tscn"
+run/main_scene="res://MainScene.tscn"
 boot_splash/bg_color=Color( 0.141176, 0.141176, 0.141176, 1 )
 
 [autoload]
