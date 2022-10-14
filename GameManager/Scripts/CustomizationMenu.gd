@@ -77,6 +77,7 @@ func _select_item(is_right: bool, index: int) -> void:
 					% [tools.cannon.wood, tools.cannon.stone]
 				_last_selected_item.wood = tools.cannon.wood
 				_last_selected_item.stone = tools.cannon.stone
+				_last_selected_item.gunpowder = tools.cannon.gunpowder
 				_last_selected_item.name = "cannon"
 				_right_button.selected = 0
 				_dialog.popup()
@@ -93,7 +94,8 @@ func _on_ConfirmationDialog_confirmed()-> void:
 	var ressources = GameManager.get_ressources()
 	
 	if (_last_selected_item.wood > ressources.wood
-		or _last_selected_item.stone > ressources.stone):
+		or _last_selected_item.stone > ressources.stone
+		or _last_selected_item.gunpowder > ressources.gunpowder):
 		_alert_dialog.popup()
 		return
 	

@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://GameManager/Scripts/GameManager.gd" type="Script" id=1]
 [ext_resource path="res://GameManager/Sprites/Stone.png" type="Texture" id=2]
 [ext_resource path="res://GameManager/Sprites/Wood.png" type="Texture" id=3]
 [ext_resource path="res://Themes/HealthBar.tres" type="Theme" id=4]
 [ext_resource path="res://CustomizationMenu/CustomizationMenu.tscn" type="PackedScene" id=5]
+[ext_resource path="res://GameManager/Sprites/GunPowder.png" type="Texture" id=6]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.2, 0.533333, 0.870588, 1 )
@@ -73,6 +74,31 @@ text = "000"
 align = 1
 valign = 1
 
+[node name="Gunpowder" type="Panel" parent="HUD"]
+margin_left = 345.0
+margin_top = 20.0
+margin_right = 495.0
+margin_bottom = 80.0
+hint_tooltip = "Pierre"
+
+[node name="GunpowderSprite" type="TextureRect" parent="HUD/Gunpowder"]
+margin_left = 6.0
+margin_top = 6.0
+rect_scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 6 )
+
+[node name="GunpowderCount" type="Label" parent="HUD/Gunpowder"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -95.0
+margin_top = -42.0
+margin_bottom = 31.0
+text = "000"
+align = 1
+valign = 1
+
 [node name="HealthBar" type="ProgressBar" parent="HUD"]
 anchor_left = 1.0
 anchor_right = 1.0
@@ -87,10 +113,10 @@ percent_visible = false
 [node name="DashBar" type="ProgressBar" parent="HUD"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -600.0
-margin_top = 20.0
-margin_right = -330.0
-margin_bottom = 75.0
+margin_left = -300.0
+margin_top = 81.0
+margin_right = -30.0
+margin_bottom = 136.0
 hint_tooltip = "Énergie"
 theme = ExtResource( 4 )
 custom_styles/fg = SubResource( 1 )

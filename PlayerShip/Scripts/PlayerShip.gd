@@ -51,9 +51,7 @@ func _stopped_fishing(__) -> void:
 	_fishing = false
 
 func _physics_process(delta : float) -> void:
-	if not _fishing:
-		_manage_dash(delta)
-	
+	_manage_dash(delta)
 	_rotate(delta)
 	_calculate_direction()
 	var _unused_velocity = move_and_slide(_direction * _velocity)
@@ -82,7 +80,8 @@ func _rotate(delta : float) -> void:
 func _manage_dash(delta : float) -> void:
 	GameManager.set_dash(_dash_timer.wait_time - _dash_timer.time_left, _dash_timer.wait_time)
 	
-	if (Input.is_action_just_pressed("dash") and _dash_timer.is_stopped()):
+	
+	if not _fishing and (Input.is_action_just_pressed("dash") and _dash_timer.is_stopped()):
 		_dashing = true
 		_direction = Vector2(
 			global_position.direction_to(get_global_mouse_position())).normalized()
