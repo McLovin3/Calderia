@@ -82,6 +82,7 @@ margin_left = -124.5
 margin_top = -48.0
 margin_right = 124.5
 margin_bottom = 48.0
+rect_min_size = Vector2( 300, 105 )
 theme = ExtResource( 6 )
 window_title = ""
 dialog_autowrap = true
