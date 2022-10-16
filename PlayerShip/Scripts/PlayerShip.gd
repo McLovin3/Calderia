@@ -10,6 +10,7 @@ export var acceleration : float = 0.005
 export var friction : float = 0.005
 export var wall_slow_multiplier : float = 0.1
 export var min_fish_speed : int = 100
+export var turn_multiplier : float = 1.0
 export var bite_rate : float = 0.15
 export var base_hp : int = 100
 export var dash_speed : int = 1000
@@ -31,8 +32,8 @@ var _right_tool : Node
 func _ready() -> void:
 	_current_hp = base_hp
 	_dash_timer.start()
-	GameManager.set_player(self)
 	GameManager.set_hp(_current_hp, base_hp)
+	GameManager.set_player(self)
 
 func _unhandled_input(event : InputEvent) -> void:
 	#https://godotengine.org/qa/80382/is-it-possible-to-detect-if-mouse-pointer-hovering-over-area
@@ -71,14 +72,13 @@ func _calculate_direction() -> void:
 
 func _rotate(delta : float) -> void:
 	if not _fishing:
-		var percentage_of_max_speed := _velocity as float / max_speed
+		var percentage_of_max_speed := _velocity * turn_multiplier as float / max_speed
 		rotation = lerp(rotation, 
 			Input.get_axis("turn_left", "turn_right") * delta + rotation, 
-			percentage_of_max_speed)
-
+				percentage_of_max_speed)
 
 func _manage_dash(delta : float) -> void:
-	GameManager.set_dash(_dash_timer.wait_time - _dash_timer.time_left, _dash_timer.wait_time)
+	GameManager.set_energy(_dash_timer.wait_time - _dash_timer.time_left, _dash_timer.wait_time)
 	
 	
 	if not _fishing and (Input.is_action_just_pressed("dash") and _dash_timer.is_stopped()):
@@ -115,7 +115,7 @@ func set_right_tool(toolScene : PackedScene) -> void:
 	clear_right_tool()
 	_right_tool = toolScene.instance()
 	add_child(_right_tool) 
-	_right_tool.position = tool_position
+	_right_tool.position += tool_position
 
 func clear_left_tool() -> void:
 	if is_instance_valid(_left_tool):

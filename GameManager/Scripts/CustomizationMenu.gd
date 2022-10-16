@@ -1,12 +1,14 @@
-extends Control
+extends CanvasLayer
 class_name CustomizationMenu
 
 export var tween_duration : float = 0.2
+export var sail_turn_multiplier_additive : float = 0.5
 export var tween_final_position : Vector2 = Vector2(75, 0)
 
 var player : PlayerShip
 
-var _cannon : PackedScene = preload("res://Cannon/Cannon.tscn")
+var _cannon : PackedScene = preload("res://Upgrades/Cannon.tscn")
+var _sail : PackedScene = preload("res://Upgrades/Sail.tscn")
 onready var _left_button : OptionButton = $LeftItem
 onready var _right_button : OptionButton = $RightItem
 onready var _left_tween : Tween = $LeftItem/Tween
@@ -24,21 +26,23 @@ func _ready() -> void:
 	_alert_dialog.get_close_button().visible = false
 
 func _unhandled_key_input(event : InputEventKey) -> void:
-	if (event.is_action_pressed("customize") 
-		and not _left_tween.is_active() 
-		and not _right_tween.is_active()):
-		
-		if not _inventory_open:
-			visible = true
-			_left_tween_setup(Vector2.ZERO, -tween_final_position)
-			_right_tween_setup(Vector2.ZERO, tween_final_position)
-		
-		elif _inventory_open:
-			_left_tween_setup(-tween_final_position, Vector2.ZERO)
-			_right_tween_setup(tween_final_position, Vector2.ZERO)
+	if player:
+		if (event.is_action_pressed("customize") 
+			and not _left_tween.is_active() 
+			and not _right_tween.is_active()):
 			
-		get_tree().paused = !get_tree().paused
-		_inventory_open = !_inventory_open
+			if not _inventory_open:
+				_left_button.visible = true
+				_right_button.visible = true
+				_left_tween_setup(_left_button.rect_position, _left_button.rect_position - tween_final_position)
+				_right_tween_setup(_right_button.rect_position, _right_button.rect_position + tween_final_position)
+			
+			elif _inventory_open:
+				_left_tween_setup(_left_button.rect_position, _left_button.rect_position + tween_final_position)
+				_right_tween_setup(_right_button.rect_position, _right_button.rect_position - tween_final_position)
+				
+			get_tree().paused = !get_tree().paused
+			_inventory_open = !_inventory_open
 
 func _left_tween_setup(initial_position : Vector2, final_position : Vector2) -> void:
 	_left_tween.interpolate_property(
@@ -60,10 +64,12 @@ func _right_tween_setup(initial_position : Vector2, final_position : Vector2) ->
 
 func _on_Tween_tween_all_completed():
 	if not _inventory_open:
-		visible = false
+		_left_button.visible = false
+		_right_button.visible = false
 
 func _select_item(is_right: bool, index: int) -> void:
 	var tools = GameManager.get_tools()
+	player.turn_multiplier = 1
 	_last_selected_item.is_right = is_right
 	_last_selected_item.index = index
 	
@@ -73,8 +79,8 @@ func _select_item(is_right: bool, index: int) -> void:
 		elif index == 1:
 			if not tools.cannon.unlocked:
 				_left_button.selected = 0
-				_dialog.dialog_text = "Acheter pour %s bois et %s pierres?" \
-					% [tools.cannon.wood, tools.cannon.stone]
+				_dialog.dialog_text = "Acheter pour %s bois, %s pierres et %s poudre à canon?" \
+					% [tools.cannon.wood, tools.cannon.stone, tools.cannon.gunpowder]
 				_last_selected_item.wood = tools.cannon.wood
 				_last_selected_item.stone = tools.cannon.stone
 				_last_selected_item.gunpowder = tools.cannon.gunpowder
@@ -83,6 +89,24 @@ func _select_item(is_right: bool, index: int) -> void:
 				_dialog.popup()
 			else:
 				player.set_right_tool(_cannon) if is_right else player.set_left_tool(_cannon)
+		elif index == 2:
+			if not tools.sail.unlocked:
+				_left_button.selected = 0
+				_dialog.dialog_text = "Acheter pour %s bois, %s pierres et %s poudre à canon?" \
+					% [tools.sail.wood, tools.sail.stone, tools.sail.gunpowder]
+				_last_selected_item.wood = tools.sail.wood
+				_last_selected_item.stone = tools.sail.stone
+				_last_selected_item.gunpowder = tools.sail.gunpowder
+				_last_selected_item.name = "sail"
+				_right_button.selected = 0
+				_dialog.popup()
+			else:
+				if is_right:
+					player.set_right_tool(_sail)
+					player.turn_multiplier += sail_turn_multiplier_additive
+				elif not is_right:
+					player.set_left_tool(_sail)
+					player.turn_multiplier += sail_turn_multiplier_additive
 
 func _on_LeftItem_item_selected(index: int) -> void:
 	_select_item(false, index)

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/CannonFlipped.png-74815a1c4af9899da55a1c6344985fd6.stex"
+path="res://.import/CannonFlipped.png-cae78f1c587906b6795fa9b134eb5324.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://CustomizationMenu/Sprites/CannonFlipped.png"
-dest_files=[ "res://.import/CannonFlipped.png-74815a1c4af9899da55a1c6344985fd6.stex" ]
+source_file="res://GameManager/Sprites/CannonFlipped.png"
+dest_files=[ "res://.import/CannonFlipped.png-cae78f1c587906b6795fa9b134eb5324.stex" ]
 
 [params]
 

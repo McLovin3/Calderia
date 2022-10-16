@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Cancel.png-2765038dccc5a99f7210a21e5014c57b.stex"
+path="res://.import/SailUpgradeIcon.png-e9da569944874670f90aa31c26d4b29a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://CustomizationMenu/Sprites/Cancel.png"
-dest_files=[ "res://.import/Cancel.png-2765038dccc5a99f7210a21e5014c57b.stex" ]
+source_file="res://GameManager/Sprites/SailUpgradeIcon.png"
+dest_files=[ "res://.import/SailUpgradeIcon.png-e9da569944874670f90aa31c26d4b29a.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

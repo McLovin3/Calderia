@@ -17,12 +17,17 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "Cannon",
 "language": "GDScript",
-"path": "res://Cannon/Scripts/Cannon.gd"
+"path": "res://Upgrades/Scripts/Cannon.gd"
 }, {
-"base": "Control",
+"base": "CanvasLayer",
 "class": "CustomizationMenu",
 "language": "GDScript",
 "path": "res://GameManager/Scripts/CustomizationMenu.gd"
+}, {
+"base": "CanvasLayer",
+"class": "HUD",
+"language": "GDScript",
+"path": "res://GameManager/Scripts/HUD.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "PlayerShip",
@@ -63,6 +68,7 @@ _global_script_class_icons={
 "Bobber": "",
 "Cannon": "",
 "CustomizationMenu": "",
+"HUD": "",
 "PlayerShip": "",
 "Projectile": "",
 "QuickTimeEvent": "",

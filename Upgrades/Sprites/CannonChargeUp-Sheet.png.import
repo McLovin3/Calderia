@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Cannon.png-eb424cf3f2764af8c5e28069de99b932.stex"
+path="res://.import/CannonChargeUp-Sheet.png-7d02138522c0b91c0c66c26463a10970.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://CustomizationMenu/Sprites/Cannon.png"
-dest_files=[ "res://.import/Cannon.png-eb424cf3f2764af8c5e28069de99b932.stex" ]
+source_file="res://Upgrades/Sprites/CannonChargeUp-Sheet.png"
+dest_files=[ "res://.import/CannonChargeUp-Sheet.png-7d02138522c0b91c0c66c26463a10970.stex" ]
 
 [params]
 
