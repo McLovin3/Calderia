@@ -2,7 +2,7 @@ extends CanvasLayer
 class_name CustomizationMenu
 
 export var tween_duration : float = 0.2
-export var sail_turn_multiplier_additive : float = 0.5
+export var sail_turn_multiplier_additive : float = 1.5
 export var tween_final_position : Vector2 = Vector2(75, 0)
 
 var player : PlayerShip
@@ -16,6 +16,8 @@ onready var _right_tween : Tween = $RightItem/Tween
 onready var _dialog : ConfirmationDialog = $ConfirmationDialog
 onready var _alert_dialog : AcceptDialog = $AlertDialog
 
+var _left_tool : PackedScene
+var _right_tool : PackedScene
 var _inventory_open : bool = false
 var _last_selected_item : Dictionary
 
@@ -66,16 +68,29 @@ func _on_Tween_tween_all_completed():
 	if not _inventory_open:
 		_left_button.visible = false
 		_right_button.visible = false
+	
+	player.turn_multiplier = 1
+	
+	
+	if (_right_tool == _sail):
+		player.turn_multiplier += sail_turn_multiplier_additive
+	
+	if (_left_tool == _sail):
+		player.turn_multiplier += sail_turn_multiplier_additive
 
 func _select_item(is_right: bool, index: int) -> void:
 	var tools = GameManager.get_tools()
-	player.turn_multiplier = 1
 	_last_selected_item.is_right = is_right
 	_last_selected_item.index = index
 	
 	if player:
 		if index == 0:
-			player.clear_right_tool() if is_right else player.clear_left_tool()
+			if is_right:
+				player.clear_right_tool()
+				_right_tool = null
+			else:
+				player.clear_left_tool()
+				_left_tool = null
 		elif index == 1:
 			if not tools.cannon.unlocked:
 				_left_button.selected = 0
@@ -88,7 +103,12 @@ func _select_item(is_right: bool, index: int) -> void:
 				_right_button.selected = 0
 				_dialog.popup()
 			else:
-				player.set_right_tool(_cannon) if is_right else player.set_left_tool(_cannon)
+				if is_right:
+					player.set_right_tool(_cannon)
+					_right_tool = _cannon
+				else:
+					player.set_left_tool(_cannon)
+					_left_tool = _cannon
 		elif index == 2:
 			if not tools.sail.unlocked:
 				_left_button.selected = 0
@@ -103,10 +123,10 @@ func _select_item(is_right: bool, index: int) -> void:
 			else:
 				if is_right:
 					player.set_right_tool(_sail)
-					player.turn_multiplier += sail_turn_multiplier_additive
+					_right_tool = _sail
 				elif not is_right:
 					player.set_left_tool(_sail)
-					player.turn_multiplier += sail_turn_multiplier_additive
+					_left_tool = _sail
 
 func _on_LeftItem_item_selected(index: int) -> void:
 	_select_item(false, index)

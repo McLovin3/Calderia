@@ -24,21 +24,22 @@ func _ready() -> void:
 	_animated_sprite.rotation = rand_range(0, 360)
 
 func _physics_process(delta : float) -> void:
-	_distance_to_player = global_position.distance_to(_player.get_global_position())
+	if (is_instance_valid(_player)):
+		_distance_to_player = global_position.distance_to(_player.get_global_position())
 	
-	if (_distance_to_player < attack_distance):
-		var direction : Vector2 = global_position.direction_to(_navigation_agent.get_next_location())
-		var desired_velocity : Vector2 = direction * speed
-		var steering : Vector2 = (desired_velocity - _velocity) * delta
-		_velocity += steering
-		
-		_animated_sprite.rotation = direction.angle()
-		
-		if (_distance_to_player > shoot_distance):
-			_velocity = move_and_slide(_velocity)
+		if (_distance_to_player < attack_distance):
+			var direction : Vector2 = global_position.direction_to(_navigation_agent.get_next_location())
+			var desired_velocity : Vector2 = direction * speed
+			var steering : Vector2 = (desired_velocity - _velocity) * delta
+			_velocity += steering
+			
+			_animated_sprite.rotation = direction.angle()
+			
+			if (_distance_to_player > shoot_distance):
+				_velocity = move_and_slide(_velocity)
 
 func _on_PathFindingTimer_timeout() -> void:
-	if (_player):
+	if (is_instance_valid(_player)):
 		_navigation_agent.set_target_location(_player.global_position)
 
 func _on_Hitbox_area_entered(area: Area2D) -> void:

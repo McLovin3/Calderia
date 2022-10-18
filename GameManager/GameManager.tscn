@@ -14,9 +14,6 @@ wait_time = 30.0
 autostart = true
 
 [node name="CustomizationMenu" parent="." instance=ExtResource( 5 )]
-tween_duration = 0.2
-sail_turn_multiplier_additive = 0.5
-tween_final_position = Vector2( 75, 0 )
 
 [node name="HUD" parent="." instance=ExtResource( 2 )]
 

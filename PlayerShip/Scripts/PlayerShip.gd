@@ -125,5 +125,9 @@ func set_left_tool(toolScene : PackedScene) -> void:
 	clear_left_tool()
 	_left_tool = toolScene.instance()
 	add_child(_left_tool)
-	_left_tool.rotation_degrees = -180
+	if (_left_tool.is_class("Sprite")):
+		_left_tool.set_flip_h(true)
+		move_child(_left_tool, 0)
+	else:
+		_left_tool.rotation_degrees = -180
 	_left_tool.position = tool_position * Vector2(-1, 1)

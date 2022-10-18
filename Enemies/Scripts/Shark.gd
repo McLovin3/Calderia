@@ -28,30 +28,31 @@ func _ready() -> void:
 	_animated_sprite.rotation = rand_range(0, 360)
 
 func _physics_process(delta : float) -> void:
-	var direction := global_position.direction_to(_navigation_agent.get_next_location())
-	var desired_velocity := direction * speed
-	var steering := (desired_velocity - _velocity) * delta
-	_velocity += steering
-	
-	if (_getting_knockbacked):
-		_time += delta
-		if (_time >= knockback_time):
-			_getting_knockbacked = false
-		position = _from.linear_interpolate(_to, _time)
-	
-	elif global_position.distance_to(_player.get_global_position()) < attack_distance:
-		_chasing = true
-		_animated_sprite.rotation = direction.angle()
-		_animated_sprite.play("Emerging")
-		_velocity = move_and_slide(_velocity)
-		_animated_sprite.rotation = _velocity.angle()
-	
-	elif _chasing :
-		_chasing = false
-		_animated_sprite.play("Emerging", true)
+	if (is_instance_valid(_player)):
+		var direction := global_position.direction_to(_navigation_agent.get_next_location())
+		var desired_velocity := direction * speed
+		var steering := (desired_velocity - _velocity) * delta
+		_velocity += steering
+		
+		if (_getting_knockbacked):
+			_time += delta
+			if (_time >= knockback_time):
+				_getting_knockbacked = false
+			position = _from.linear_interpolate(_to, _time)
+		
+		elif global_position.distance_to(_player.get_global_position()) < attack_distance:
+			_chasing = true
+			_animated_sprite.rotation = direction.angle()
+			_animated_sprite.play("Emerging")
+			_velocity = move_and_slide(_velocity)
+			_animated_sprite.rotation = _velocity.angle()
+		
+		elif _chasing :
+			_chasing = false
+			_animated_sprite.play("Emerging", true)
 
 func _on_PathFindingTimer_timeout() -> void:
-	if (_player):
+	if (is_instance_valid(_player)):
 		_navigation_agent.set_target_location(_player.global_position)
 
 func _on_Hitbox_area_entered(area: Area2D) -> void:
