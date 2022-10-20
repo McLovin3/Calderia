@@ -120,6 +120,7 @@ func set_right_tool(toolScene : PackedScene) -> void:
 	_right_tool = toolScene.instance()
 	add_child(_right_tool) 
 	_right_tool.position += tool_position
+	move_child(_right_tool, 0)
 
 func clear_left_tool() -> void:
 	if is_instance_valid(_left_tool):
