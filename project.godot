@@ -97,6 +97,7 @@ gdscript/warnings/return_value_discarded=false
 
 background=false
 theme=false
+icon=false
 
 [gui]
 

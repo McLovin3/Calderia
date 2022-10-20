@@ -103,7 +103,6 @@ func _manage_dash(delta : float) -> void:
 func _on_HitBox_area_entered(area : Area2D) -> void:
 	if (area.get_parent().get("damage")):
 		_current_hp -= (area.get_parent().damage - (area.get_parent().damage * damage_negation))
-		print(_current_hp)
 		
 		if (_current_hp <= 0):
 			queue_free()
