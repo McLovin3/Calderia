@@ -24,8 +24,11 @@ var _left_tool : PackedScene
 var _right_tool : PackedScene
 var _inventory_open : bool = false
 var _last_selected_item : Dictionary
+enum _upgrades_enum {NOTHING, CANNON, SAIL, PADDLE, ARMOR}
+var _upgrades_items : Array
 
 func _ready() -> void:
+	_upgrades_items = [null, _cannon, _sail, _paddle, _armor]
 	_dialog.get_close_button().disabled = true
 	_dialog.get_close_button().visible = false
 	_alert_dialog.get_close_button().disabled = true
@@ -40,12 +43,16 @@ func _input(event: InputEvent) -> void:
 			if not _inventory_open:
 				_left_button.visible = true
 				_right_button.visible = true
-				_left_tween_setup(_left_button.rect_position, _left_button.rect_position - tween_final_position)
-				_right_tween_setup(_right_button.rect_position, _right_button.rect_position + tween_final_position)
+				_left_tween_setup(_left_button.rect_position, 
+					_left_button.rect_position - tween_final_position)
+				_right_tween_setup(_right_button.rect_position, 
+					_right_button.rect_position + tween_final_position)
 			
 			elif _inventory_open:
-				_left_tween_setup(_left_button.rect_position, _left_button.rect_position + tween_final_position)
-				_right_tween_setup(_right_button.rect_position, _right_button.rect_position - tween_final_position)
+				_left_tween_setup(_left_button.rect_position, 
+					_left_button.rect_position + tween_final_position)
+				_right_tween_setup(_right_button.rect_position, 
+					_right_button.rect_position - tween_final_position)
 				
 			get_tree().paused = !get_tree().paused
 			_inventory_open = !_inventory_open
@@ -91,103 +98,53 @@ func _on_Tween_tween_all_completed():
 	elif (_left_tool == _armor):
 		player.damage_negation += armor_damage_negation
 
-func _select_item(is_right: bool, index: int) -> void:
+func _select_upgrade(upgrade: String, index: int, is_right: bool) -> void:
 	var tools = GameManager.get_tools()
+	
+	if not tools.get(upgrade).unlocked:
+		if is_right:
+			_right_button.selected = 0
+		else:
+			_left_button.selected = 0
+			
+		_dialog.dialog_text = "Acheter pour %s bois, %s pierres et %s poudre à canon?" \
+			% [tools.get(upgrade).wood, tools.get(upgrade).stone, tools.get(upgrade).gunpowder]
+		_last_selected_item.wood = tools.get(upgrade).wood
+		_last_selected_item.stone = tools.get(upgrade).stone
+		_last_selected_item.gunpowder = tools.get(upgrade).gunpowder
+		_last_selected_item.name = upgrade
+		_dialog.popup()
+	else:
+		if is_right:
+			player.set_right_tool(_upgrades_items[index])
+			_right_tool = _upgrades_items[index]
+		else:
+			player.set_left_tool(_upgrades_items[index])
+			_left_tool = _upgrades_items[index]
+
+func _select_item(is_right: bool, index: int) -> void:
 	_last_selected_item.is_right = is_right
 	_last_selected_item.index = index
 	
+	
 	if player:
-		if index == 0:
-			if is_right:
-				player.clear_right_tool()
-				_right_tool = null
-			else:
-				player.clear_left_tool()
-				_left_tool = null
-		elif index == 1:
-			if not tools.cannon.unlocked:
+		match index:
+			_upgrades_enum.NOTHING:
 				if is_right:
-					_right_button.selected = 0
+					player.clear_right_tool()
+					_right_tool = null
 				else:
-					_left_button.selected = 0
-					
-				_dialog.dialog_text = "Acheter pour %s bois, %s pierres et %s poudre à canon?" \
-					% [tools.cannon.wood, tools.cannon.stone, tools.cannon.gunpowder]
-				_last_selected_item.wood = tools.cannon.wood
-				_last_selected_item.stone = tools.cannon.stone
-				_last_selected_item.gunpowder = tools.cannon.gunpowder
-				_last_selected_item.name = "cannon"
-				_dialog.popup()
-			else:
-				if is_right:
-					player.set_right_tool(_cannon)
-					_right_tool = _cannon
-				else:
-					player.set_left_tool(_cannon)
-					_left_tool = _cannon
-		elif index == 2:
-			if not tools.sail.unlocked:
-				if is_right:
-					_right_button.selected = 0
-				else:
-					_left_button.selected = 0
-					
-				_dialog.dialog_text = "Acheter pour %s bois, %s pierres et %s poudre à canon?" \
-					% [tools.sail.wood, tools.sail.stone, tools.sail.gunpowder]
-				_last_selected_item.wood = tools.sail.wood
-				_last_selected_item.stone = tools.sail.stone
-				_last_selected_item.gunpowder = tools.sail.gunpowder
-				_last_selected_item.name = "sail"
-				_dialog.popup()
-			else:
-				if is_right:
-					player.set_right_tool(_sail)
-					_right_tool = _sail
-				elif not is_right:
-					player.set_left_tool(_sail)
-					_left_tool = _sail
-		elif index == 3:
-			if not tools.paddle.unlocked:
-				if is_right:
-					_right_button.selected = 0
-				else:
-					_left_button.selected = 0
-					
-				_dialog.dialog_text = "Acheter pour %s bois, %s pierres et %s poudre à canon?" \
-					% [tools.paddle.wood, tools.paddle.stone, tools.paddle.gunpowder]
-				_last_selected_item.wood = tools.paddle.wood
-				_last_selected_item.stone = tools.paddle.stone
-				_last_selected_item.gunpowder = tools.paddle.gunpowder
-				_last_selected_item.name = "paddle"
-				_dialog.popup()
-			else:
-				if is_right:
-					player.set_right_tool(_paddle)
-					_right_tool = _paddle
-				elif not is_right:
-					player.set_left_tool(_paddle)
-					_left_tool = _paddle
-		elif index == 4:
-			if not tools.armor.unlocked:
-				if is_right:
-					_right_button.selected = 0
-				else:
-					_left_button.selected = 0
-					
-				_dialog.dialog_text = "Acheter pour %s bois, %s pierres et %s poudre à canon?" \
-					% [tools.armor.wood, tools.armor.stone, tools.armor.gunpowder]
-				_last_selected_item.wood = tools.armor.wood
-				_last_selected_item.stone = tools.armor.stone
-				_last_selected_item.gunpowder = tools.armor.gunpowder
-				_last_selected_item.name = "armor"
-				_dialog.popup()
-			else:
-				if is_right:
-					player.set_right_tool(_armor)
-					_right_tool = _armor
-				elif not is_right:
-					player.set_left_tool(_armor)
-					_left_tool = _armor
+					player.clear_left_tool()
+					_left_tool = null
+			_upgrades_enum.CANNON:
+				_select_upgrade("cannon", index, is_right)
+			_upgrades_enum.SAIL:
+				_select_upgrade("sail", index, is_right)
+			_upgrades_enum.PADDLE:
+				_select_upgrade("paddle", index, is_right)
+			_upgrades_enum.ARMOR:
+				_select_upgrade("armor", index, is_right)
+
 
 func _on_LeftItem_item_selected(index: int) -> void:
 	_select_item(false, index)
