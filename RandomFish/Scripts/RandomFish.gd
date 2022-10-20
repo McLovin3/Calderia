@@ -1,26 +1,17 @@
 extends Sprite
 class_name RandomFish
 
-export var sprite_path := "res://RandomFish/Sprites/"
 export var sprite_scale := Vector2(2, 2)
 
+onready var _wood_fish := preload("res://RandomFish/Sprites/WoodFish.png")
+onready var _stone_fish := preload("res://RandomFish/Sprites/StoneFish.png")
+onready var _gunpowder_fish := preload("res://RandomFish/Sprites/GunpowderFish.png")
+
+
 func _ready():
-	var fish_sprites := [] 
-	# https://godotengine.org/qa/62238/how-to-preload-folders-worth-of-images-and-put-them-into-array
-	var directory := Directory.new()
-	directory.open(sprite_path)
-	directory.list_dir_begin()
-	while true:
-		var current_file := directory.get_next()
-		
-		if current_file == "":
-			break;
-		
-		elif current_file.ends_with("Fish.png"):
-			fish_sprites.append(current_file)
-	
+	var _fishes := [_wood_fish, _stone_fish, _gunpowder_fish]
 	randomize()
-	var fish_sprite = load(sprite_path + fish_sprites[randi() % fish_sprites.size()])
+	var fish_sprite = _fishes[randi() % _fishes.size()]
 	texture = fish_sprite
 	scale = sprite_scale
 

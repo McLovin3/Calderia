@@ -48,9 +48,9 @@ var _data : Dictionary = \
 
 func _ready() -> void:
 	_load_game()
-	add_stone(1000)
-	add_gunpowder(1000)
-	add_wood(1000)
+	#add_stone(1000)
+	#add_gunpowder(1000)
+	#add_wood(1000)
 
 func _load_game() -> void:
 	var save_file := File.new()

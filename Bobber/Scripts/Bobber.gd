@@ -45,7 +45,7 @@ func _fish_caught() -> void:
 		GameManager.add_wood(int(base_ressource_amount * _fish_size))
 	elif instance.texture.resource_path.find("Stone") != -1:
 		GameManager.add_stone(int(base_ressource_amount * _fish_size))
-	elif instance.texture.resource_path.find("G") != -1:
+	elif instance.texture.resource_path.find("Gunpowder") != -1:
 		GameManager.add_gunpowder(int(base_ressource_amount * _fish_size))
 	queue_free()
 
