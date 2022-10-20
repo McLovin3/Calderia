@@ -2,13 +2,17 @@ extends CanvasLayer
 class_name CustomizationMenu
 
 export var tween_duration : float = 0.2
-export var sail_turn_multiplier_additive : float = 1.5
+export var sail_speed_additive : float = 100
+export var paddle_turn_additive : float = 1
+export var armor_damage_negation : float = 0.25
 export var tween_final_position : Vector2 = Vector2(75, 0)
 
 var player : PlayerShip
 
 var _cannon : PackedScene = preload("res://Upgrades/Cannon.tscn")
 var _sail : PackedScene = preload("res://Upgrades/Sail.tscn")
+var _paddle : PackedScene = preload("res://Upgrades/Paddle.tscn")
+var _armor : PackedScene = preload("res://Upgrades/Armor.tscn")
 onready var _left_button : OptionButton = $LeftItem
 onready var _right_button : OptionButton = $RightItem
 onready var _left_tween : Tween = $LeftItem/Tween
@@ -27,7 +31,7 @@ func _ready() -> void:
 	_alert_dialog.get_close_button().disabled = true
 	_alert_dialog.get_close_button().visible = false
 
-func _unhandled_key_input(event : InputEventKey) -> void:
+func _input(event: InputEvent) -> void:
 	if player:
 		if (event.is_action_pressed("customize") 
 			and not _left_tween.is_active() 
@@ -70,13 +74,22 @@ func _on_Tween_tween_all_completed():
 		_right_button.visible = false
 	
 	player.turn_multiplier = 1
-	
+	player.extra_speed = 0
+	player.damage_negation = 0
 	
 	if (_right_tool == _sail):
-		player.turn_multiplier += sail_turn_multiplier_additive
+		player.extra_speed += sail_speed_additive
+	elif (_right_tool == _paddle):
+		player.turn_multiplier += paddle_turn_additive
+	elif (_right_tool == _armor):
+		player.damage_negation += armor_damage_negation
 	
 	if (_left_tool == _sail):
-		player.turn_multiplier += sail_turn_multiplier_additive
+		player.extra_speed += sail_speed_additive
+	elif (_left_tool == _paddle):
+		player.turn_multiplier += paddle_turn_additive
+	elif (_left_tool == _armor):
+		player.damage_negation += armor_damage_negation
 
 func _select_item(is_right: bool, index: int) -> void:
 	var tools = GameManager.get_tools()
@@ -93,14 +106,17 @@ func _select_item(is_right: bool, index: int) -> void:
 				_left_tool = null
 		elif index == 1:
 			if not tools.cannon.unlocked:
-				_left_button.selected = 0
+				if is_right:
+					_right_button.selected = 0
+				else:
+					_left_button.selected = 0
+					
 				_dialog.dialog_text = "Acheter pour %s bois, %s pierres et %s poudre à canon?" \
 					% [tools.cannon.wood, tools.cannon.stone, tools.cannon.gunpowder]
 				_last_selected_item.wood = tools.cannon.wood
 				_last_selected_item.stone = tools.cannon.stone
 				_last_selected_item.gunpowder = tools.cannon.gunpowder
 				_last_selected_item.name = "cannon"
-				_right_button.selected = 0
 				_dialog.popup()
 			else:
 				if is_right:
@@ -111,14 +127,17 @@ func _select_item(is_right: bool, index: int) -> void:
 					_left_tool = _cannon
 		elif index == 2:
 			if not tools.sail.unlocked:
-				_left_button.selected = 0
+				if is_right:
+					_right_button.selected = 0
+				else:
+					_left_button.selected = 0
+					
 				_dialog.dialog_text = "Acheter pour %s bois, %s pierres et %s poudre à canon?" \
 					% [tools.sail.wood, tools.sail.stone, tools.sail.gunpowder]
 				_last_selected_item.wood = tools.sail.wood
 				_last_selected_item.stone = tools.sail.stone
 				_last_selected_item.gunpowder = tools.sail.gunpowder
 				_last_selected_item.name = "sail"
-				_right_button.selected = 0
 				_dialog.popup()
 			else:
 				if is_right:
@@ -127,6 +146,48 @@ func _select_item(is_right: bool, index: int) -> void:
 				elif not is_right:
 					player.set_left_tool(_sail)
 					_left_tool = _sail
+		elif index == 3:
+			if not tools.paddle.unlocked:
+				if is_right:
+					_right_button.selected = 0
+				else:
+					_left_button.selected = 0
+					
+				_dialog.dialog_text = "Acheter pour %s bois, %s pierres et %s poudre à canon?" \
+					% [tools.paddle.wood, tools.paddle.stone, tools.paddle.gunpowder]
+				_last_selected_item.wood = tools.paddle.wood
+				_last_selected_item.stone = tools.paddle.stone
+				_last_selected_item.gunpowder = tools.paddle.gunpowder
+				_last_selected_item.name = "paddle"
+				_dialog.popup()
+			else:
+				if is_right:
+					player.set_right_tool(_paddle)
+					_right_tool = _paddle
+				elif not is_right:
+					player.set_left_tool(_paddle)
+					_left_tool = _paddle
+		elif index == 4:
+			if not tools.armor.unlocked:
+				if is_right:
+					_right_button.selected = 0
+				else:
+					_left_button.selected = 0
+					
+				_dialog.dialog_text = "Acheter pour %s bois, %s pierres et %s poudre à canon?" \
+					% [tools.armor.wood, tools.armor.stone, tools.armor.gunpowder]
+				_last_selected_item.wood = tools.armor.wood
+				_last_selected_item.stone = tools.armor.stone
+				_last_selected_item.gunpowder = tools.armor.gunpowder
+				_last_selected_item.name = "armor"
+				_dialog.popup()
+			else:
+				if is_right:
+					player.set_right_tool(_armor)
+					_right_tool = _armor
+				elif not is_right:
+					player.set_left_tool(_armor)
+					_left_tool = _armor
 
 func _on_LeftItem_item_selected(index: int) -> void:
 	_select_item(false, index)

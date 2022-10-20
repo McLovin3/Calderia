@@ -11,7 +11,7 @@
 position = Vector2( 11, -20 )
 
 [node name="KinematicBody2D" parent="Navigation2D" instance=ExtResource( 3 )]
-position = Vector2( -852, 196 )
+position = Vector2( -1407, 180 )
 path_to_player = NodePath("../../Player")
 
 [node name="KinematicBody2D3" parent="Navigation2D" instance=ExtResource( 1 )]

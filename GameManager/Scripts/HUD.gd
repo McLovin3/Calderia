@@ -6,6 +6,17 @@ onready var _wood_label : Label = $Wood/WoodCount
 onready var _gunpowder_label : Label = $Gunpowder/GunpowderCount
 onready var _health_bar : ProgressBar = $HealthBar
 onready var _energy_bar : ProgressBar = $DashBar
+onready var _controls_container : PanelContainer = $ControlsContainer
+
+
+func _input(event: InputEvent) -> void:
+	if (event.is_action_pressed("controls")):
+		_controls_container.visible = true
+		get_tree().paused = true
+	
+	elif (event.is_action_released("controls")):
+		_controls_container.visible = false
+		get_tree().paused = false
 
 
 func set_ressources(ressources: Dictionary) -> void:

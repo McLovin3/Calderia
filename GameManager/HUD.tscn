@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://GameManager/Scripts/HUD.gd" type="Script" id=1]
 [ext_resource path="res://Themes/HealthBar.tres" type="Theme" id=2]
@@ -12,6 +12,23 @@ corner_radius_top_left = 25
 corner_radius_top_right = 25
 corner_radius_bottom_right = 25
 corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id=2]
+content_margin_left = 30.0
+bg_color = Color( 0.67451, 0.156863, 0.278431, 1 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 0.419608, 0.14902, 0.262745, 1 )
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+corner_detail = 20
+
+[sub_resource type="Theme" id=3]
+PanelContainer/styles/panel = SubResource( 2 )
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource( 1 )
@@ -113,3 +130,28 @@ margin_bottom = 31.0
 text = "000"
 align = 1
 valign = 1
+
+[node name="ControlsContainer" type="PanelContainer" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -248.0
+margin_top = -127.0
+margin_right = 248.0
+margin_bottom = 127.0
+theme = SubResource( 3 )
+
+[node name="Controls" type="Label" parent="ControlsContainer"]
+margin_left = 30.0
+margin_top = 20.0
+margin_right = 491.0
+margin_bottom = 233.0
+rect_pivot_offset = Vector2( -239, -57 )
+text = "Bouger : AWD
+Pêcher : MMB
+Canon : LMB
+Dash : RMB
+Personalisation : C
+Zoom : Z"

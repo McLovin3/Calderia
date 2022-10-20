@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/PaddleUpgradeIcon.png-e3a2a4c725a7e895989e972c253965e2.stex"
+path="res://.import/PaddleUpgradeIconFlipped.png-4045b486fc1419c16ad4cba230be175e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Upgrades/Sprites/PaddleUpgradeIcon.png"
-dest_files=[ "res://.import/PaddleUpgradeIcon.png-e3a2a4c725a7e895989e972c253965e2.stex" ]
+source_file="res://GameManager/Sprites/PaddleUpgradeIconFlipped.png"
+dest_files=[ "res://.import/PaddleUpgradeIconFlipped.png-4045b486fc1419c16ad4cba230be175e.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

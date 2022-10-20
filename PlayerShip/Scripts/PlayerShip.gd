@@ -17,6 +17,8 @@ export var dash_speed : int = 1000
 export var dash_time : float = 0.15
 export var dash_distance : float = 1000
 export var tool_position : Vector2 = Vector2(30.5, 5)
+export var damage_negation : float
+export var extra_speed : float
 
 var _fishing : bool = false
 var _velocity : int = 0
@@ -60,10 +62,12 @@ func _physics_process(delta : float) -> void:
 func _calculate_direction() -> void:
 	if not _fishing and Input.is_action_pressed("up"):
 		if is_on_ceiling() || is_on_wall() || is_on_floor():
-			_velocity = lerp(_velocity, Input.get_action_strength("up") * max_speed * wall_slow_multiplier, acceleration)
+			_velocity = lerp(_velocity, Input.get_action_strength("up") * 
+				(max_speed + extra_speed) * wall_slow_multiplier, acceleration)
 		
 		else:
-			_velocity = lerp(_velocity, Input.get_action_strength("up") * max_speed, acceleration)
+			_velocity = lerp(_velocity, Input.get_action_strength("up") * 
+				(max_speed + extra_speed), acceleration)
 	
 	else:
 		_velocity = lerp(_velocity, 0, friction)
@@ -98,7 +102,8 @@ func _manage_dash(delta : float) -> void:
 
 func _on_HitBox_area_entered(area : Area2D) -> void:
 	if (area.get_parent().get("damage")):
-		_current_hp -= area.get_parent().damage
+		_current_hp -= (area.get_parent().damage - (area.get_parent().damage * damage_negation))
+		print(_current_hp)
 		
 		if (_current_hp <= 0):
 			queue_free()

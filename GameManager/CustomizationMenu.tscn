@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Themes/Dialog.tres" type="Theme" id=1]
 [ext_resource path="res://Themes/OptionButton.tres" type="Theme" id=2]
@@ -8,6 +8,10 @@
 [ext_resource path="res://GameManager/Sprites/SailUpgradeIcon.png" type="Texture" id=6]
 [ext_resource path="res://GameManager/Sprites/SailUpgradeIconFlipped.png" type="Texture" id=7]
 [ext_resource path="res://GameManager/Sprites/CannonFlipped.png" type="Texture" id=8]
+[ext_resource path="res://GameManager/Sprites/ArmorUpgradeIconFlipped.png" type="Texture" id=9]
+[ext_resource path="res://GameManager/Sprites/PaddleUpgradeIcon.png" type="Texture" id=10]
+[ext_resource path="res://GameManager/Sprites/ArmorUpgradeIcon.png" type="Texture" id=11]
+[ext_resource path="res://GameManager/Sprites/PaddleUpgradeIconFlipped.png" type="Texture" id=12]
 
 [sub_resource type="StyleBoxFlat" id=2]
 content_margin_left = 10.0
@@ -60,7 +64,7 @@ theme = ExtResource( 2 )
 icon = ExtResource( 4 )
 flat = true
 expand_icon = true
-items = [ "", ExtResource( 4 ), false, 1, null, "", ExtResource( 8 ), false, 1, null, "", ExtResource( 7 ), false, 2, null ]
+items = [ "", ExtResource( 4 ), false, 1, null, "", ExtResource( 8 ), false, 1, null, "", ExtResource( 7 ), false, 2, null, "", ExtResource( 12 ), false, 3, null, "", ExtResource( 9 ), false, 4, null ]
 selected = 0
 
 [node name="Tween" type="Tween" parent="LeftItem"]
@@ -79,7 +83,7 @@ theme = ExtResource( 2 )
 icon = ExtResource( 4 )
 flat = true
 expand_icon = true
-items = [ "", ExtResource( 4 ), false, 0, null, "", ExtResource( 5 ), false, 1, null, "", ExtResource( 6 ), false, 2, null ]
+items = [ "", ExtResource( 4 ), false, 0, null, "", ExtResource( 5 ), false, 1, null, "", ExtResource( 6 ), false, 2, null, "", ExtResource( 10 ), false, 3, null, "", ExtResource( 11 ), false, 4, null ]
 selected = 0
 
 [node name="Tween" type="Tween" parent="RightItem"]

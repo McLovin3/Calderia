@@ -24,20 +24,30 @@ var _data : Dictionary = \
 				"sail" :
 					{
 						"unlocked" : false,
+						"wood" : 100,
+						"stone" : 50,
+						"gunpowder" : 0
+					},
+				"paddle" :
+					{
+						"unlocked" : false,
 						"wood" : 150,
 						"stone" : 0,
 						"gunpowder" : 0
-					}
+					},
+				"armor" :
+					{
+						"unlocked" : false,
+						"wood" : 0,
+						"stone" : 50,
+						"gunpowder" : 100
+					} 
 			}
 	} 
 
 
 func _ready() -> void:
 	_load_game()
-	add_wood(200)
-	add_stone(200)
-	add_gunpowder(200)
-
 
 func _load_game() -> void:
 	var save_file := File.new()
@@ -65,19 +75,19 @@ func _on_SaveInterval_timeout() -> void:
 
 func add_wood(amount: int) -> void:
 	_data.ressources.wood += amount
-	_hud.set_wood(amount)
+	_hud.set_wood(_data.ressources.wood)
 	_save_game()
 
 
 func add_stone(amount: int) -> void:
 	_data.ressources.stone += amount
-	_hud.set_stone(amount)
+	_hud.set_stone(_data.ressources.stone)
 	_save_game()
 
 
 func add_gunpowder(amount: int) -> void:
 	_data.ressources.gunpowder += amount
-	_hud.set_gunpowder(amount)
+	_hud.set_gunpowder(_data.ressources.gunpowder)
 	_save_game()
 
 
